@@ -99,3 +99,21 @@ Rust tidak mengizinkan adanya static variable yang bisa diubah (mutable) agar da
 <br>
 
 #### Reflection Subscriber-2
+
+> Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.
+
+Saya sudah pernah mengeksplor dan mencoba untuk memahami kode yang ada di `src/lib.rs`. Di dalam file `lib.rs`, khususnya yang ada di BambangShop Receiver ini, terdapat `AppConfig` yang menyimpan konfigurasi berupa root url dari suatu instance (salah satu receiver yang dijalankan) aplikasi, root url dari bagian publisher, dan nama dari instance yang merupakan nama dari penerima notifikasi yang sudah dirancang.
+
+Selain itu, terdapat pula konfigurasi HTTP client bernama `REQWEST_CLIENT` yang akan meng-handle request HTTP ke sumber eksternal, misalnya ke bagian publisher. Selain kedua konfigurasi tadi, masih ada konfigurasi response error yang sudah distandarisasi, dimana terdapat method `compose_error_response` yang membantu membuat suatu response berstatus error dengan format tertentu.
+
+
+> Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy enough to add to the system?
+
+Observer pattern yang diaplikasikan saat ini sudah dapat memudahkan proses penambahan subscriber karena program bersifat **open-closed**, sehingga memungkinkan penambahan observer baru tanpa perlu mengubah kode yang sudah ada. 
+
+Selain itu, meskipun nantinya akan dibuat lebih dari satu instance Main App, masing-masing instance tetap dapat memiliki mekanisme notifikasi sendiri yang akan mengirimkan notifikasi tersebut kepada subscriber, asalkan tahapan subscribe yang dilakukan melalui API dan proses yang sesuai.
+
+
+> Have you tried to make your own Tests, or enhance documentation on your Postman collection? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).
+
+Testing dan Dokumentasi API di Postman collection sangat berguna dalam menjaga dan memelihara proyek ini. Dengan menggunakan fitur-fitur yang ada di Postman secara maksimal, pengujian program di tahap development tentunya akan menjadi lebih mudah dan ringan. Dengan membuat unit test dan functional test (maupun test lainnya), saya juga memverifikasi lebih lanjut bahwa setiap bagian di aplikasi yang saya buat sudah bekerja dengan baik. Hal ini tentu saja juga akan berpengaruh dalam proyek yang dilakukan bersama tim, dimana pengerjaan proyek bisa sangat terbantu dalam segi efisiensi dan efektifitas.
